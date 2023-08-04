@@ -27,13 +27,13 @@ type Command interface {
 }
 ```
 
-So we need to implmement `Run` and `ParentName` in our GreetPlugin. Let's do it.
+So we need to implement `Run` and `ParentName` in our GreetPlugin. Let's do it.
 
 ```go
 // in internal/ox/plugins/greet/plugin.go
 import (
     "context"
-    "fmt"    
+    "fmt"
 )
 
 type Plugin struct {}
@@ -52,7 +52,7 @@ func (p *Plugin) Run(context.Context, string, []string) error {
 }
 ```
 
-And there we have our first plugin. 
+And there we have our first plugin.
 
 ### Connecting our plugin
 
@@ -70,7 +70,7 @@ import (
 	"myapp"
 	_ "myapp/app/tasks"
 	_ "myapp/app/models"
-    
+
     // ** The plugin package is imported here so that it can be used. **
     "myapp/internal/ox/plugins/greet"
 
@@ -82,11 +82,11 @@ import (
 // when found in the source code. In here you can add/remove plugins that
 // your app will use as part of its lifecycle.
 func main() {
-	cli.Use(soda.Plugins(myapp.Migrations)...) 
+	cli.Use(soda.Plugins(myapp.Migrations)...)
     // ...
     // ** The plugin is added here into the registry. **
     cli.Use(&greet.Plugin{})
-    
+
     // Here we run the CLI.
 	err := cli.Run(context.Background(), os.Args)
 	if err != nil {

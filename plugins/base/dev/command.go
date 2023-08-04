@@ -2,7 +2,6 @@ package dev
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/wawandco/ox/internal/log"
 	"github.com/wawandco/ox/plugins/core"
@@ -33,13 +32,12 @@ func (d Command) ParentName() string {
 
 // HelpText returns the help Text of build function
 func (d Command) HelpText() string {
-	return "calls NPM or yarn to start webpack watching the assetst"
+	return "calls NPM or yarn to start webpack watching the assets"
 }
 
 // Run calls each of the beforedeveloper plugins and then
 // executes Developer plugins in parallel.
 func (d *Command) Run(ctx context.Context, root string, args []string) error {
-	fmt.Println("RUNEO----------------------->")
 	for _, bd := range d.beforeDevs {
 		err := bd.BeforeDevelop(ctx, root)
 		if err != nil {
